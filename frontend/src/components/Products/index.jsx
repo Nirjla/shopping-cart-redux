@@ -1,6 +1,9 @@
+import { useDispatch } from "react-redux";
 import { useGetProductsQuery } from "../../api/api";
+import { addToCart } from "../../slices/cartSlice";
 
 const Products = () => {
+  const dispatch = useDispatch();
   const { data: products, isLoading, isError, error } = useGetProductsQuery();
   if (isLoading) {
     return <div>Loading...</div>;
@@ -8,6 +11,9 @@ const Products = () => {
   if (isError) {
     return <div>Error:{error.message}</div>;
   }
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+  };
   return (
     <>
       <div className="bg-white">
@@ -18,7 +24,7 @@ const Products = () => {
 
           <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             {products.map((product) => (
-              <div key={product.id} className="group relative">
+              <div key={product.id} className=" relative">
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-white lg:aspect-none group-hover:opacity-75 lg:h-80">
                   <img
                     src={product.imageUrl}
@@ -30,7 +36,7 @@ const Products = () => {
                   <div>
                     <h3 className="text-sm text-gray-700">
                       <a href={product.href}>
-                        <span aria-hidden="true" className="absolute inset-0" />
+                        <span aria-hidden="true" className="absolute " />
                         {product.name}
                       </a>
                     </h3>
@@ -43,7 +49,9 @@ const Products = () => {
                   </p>
                 </div>
                 <div className="text-center ">
-                  <button>Add to Cart</button>
+                  <button onClick={()=>handleAddToCart(product)}>
+                    Add to Cart
+                  </button>
                 </div>
               </div>
             ))}

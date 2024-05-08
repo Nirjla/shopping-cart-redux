@@ -12,7 +12,6 @@ app.use('/products', productsRouter)
 app.use('/banners', bannersRouter)
 //routes handlers
 app.get("/", (req, res) => {
-      console.log(req.body)
   res.send("Welcome to Ecommerce Store Api");
 });
 

@@ -29,7 +29,7 @@ const Navbar = () => {
           <div className="hidden lg:flex lg:gap-x-12">
 
             <Link
-              to="#"
+              to="/"
               className="text-sm font-semibold leading-6 text-gray-900"
             >
               Home
@@ -42,13 +42,14 @@ const Navbar = () => {
             </Link>
             
           </div>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <div className="hidden gap-2 lg:flex lg:flex-1 lg:justify-end">
             <Link
               to="#"
               className="text-sm font-semibold leading-6 text-gray-900"
             >
               Log in <span aria-hidden="true">&rarr;</span>
             </Link>
+            <button className="text-sm font-semibold leading-6 text-gray-900">Cart</button>
           </div>
         </nav>
      
