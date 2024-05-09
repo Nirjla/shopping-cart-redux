@@ -5,8 +5,7 @@ import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const cartItems = useSelector((state) => state.cart.cartItems);
-
+  const cart = useSelector((state) => state.cart);
   return (
     <>
       <header className="bg-white">
@@ -58,7 +57,7 @@ const Navbar = () => {
               onClick={() => setIsCartOpen(!isCartOpen)}
             >
               Cart
-              <span className="pl-2">{cartItems?.length}</span>
+              <span className="pl-2">{cart.cartTotalQuantity}</span>
             </button>
             {isCartOpen && <Cart />}
           </div>

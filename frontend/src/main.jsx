@@ -4,6 +4,9 @@ import App from "./App.jsx";
 import "./index.css";
 import { Provider } from "react-redux";
 import { store } from "./store/store.js";
+import { getTotal } from "./slices/cartSlice";
+
+store.dispatch(getTotal());
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

@@ -1,10 +1,11 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearCart,
   decreaseQuantity,
+  getTotal,
   increaseQuantity,
   removeFromCart,
 } from "../../slices/cartSlice";
@@ -12,8 +13,11 @@ import {
 export default function Cart() {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(true);
-  const cartItems = useSelector((state) => state.cart.cartItems);
-  console.log(cartItems);
+  const cart = useSelector((state) => state.cart);
+  useEffect(() => {
+    dispatch(getTotal());
+  }, [cart, dispatch]);
+  console.log(cart.cartItems);
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog className="relative z-10" onClose={setOpen}>
@@ -63,14 +67,14 @@ export default function Cart() {
 
                       <div className="mt-8">
                         <div className="flow-root">
-                          {cartItems.length === 0 ? (
+                          {cart.cartItems.length === 0 ? (
                             <p>Your cart is currently empty</p>
                           ) : (
                             <ul
                               role="list"
                               className="-my-6 divide-y divide-gray-200"
                             >
-                              {cartItems.map((product) => (
+                              {cart.cartItems.map((product) => (
                                 <li key={product.id} className="flex py-6">
                                   <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                     <img
@@ -152,12 +156,12 @@ export default function Cart() {
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>${}</p>
+                        <p>${cart.cartTotalAmount}</p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">
                         Shipping and taxes calculated at checkout.
                       </p>
-                      {cartItems.length < 0 && (
+                      {cart.cartItems.length < 0 && (
                         <div className="mt-6">
                           <a
                             href="#"
