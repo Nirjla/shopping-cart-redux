@@ -3,7 +3,7 @@ import { api } from "../api/api";
 import cartReducer from "../slices/cartSlice";
 export const store = configureStore({
   reducer: {
-    reducer: cartReducer,
+    cart: cartReducer,
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>

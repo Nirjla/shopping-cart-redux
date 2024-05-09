@@ -1,8 +1,9 @@
 import { useDispatch } from "react-redux";
 import { useGetProductsQuery } from "../../api/api";
 import { addToCart } from "../../slices/cartSlice";
-
+import { useNavigate } from "react-router-dom";
 const Products = () => {
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const { data: products, isLoading, isError, error } = useGetProductsQuery();
   if (isLoading) {
@@ -13,6 +14,7 @@ const Products = () => {
   }
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
+    // navigate('/cart');
   };
   return (
     <>
@@ -40,12 +42,10 @@ const Products = () => {
                         {product.name}
                       </a>
                     </h3>
-                    <p className="mt-1 text-sm text-gray-500">
-                      {product.color}
-                    </p>
+                    
                   </div>
                   <p className="text-sm font-medium text-gray-900">
-                    {product.price}
+                    {product.price }
                   </p>
                 </div>
                 <div className="text-center ">

@@ -1,6 +1,12 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import Cart from "../Cart";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
   return (
     <>
       <header className="bg-white">
@@ -27,7 +33,6 @@ const Navbar = () => {
             </button>
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
-
             <Link
               to="/"
               className="text-sm font-semibold leading-6 text-gray-900"
@@ -40,7 +45,6 @@ const Navbar = () => {
             >
               Products
             </Link>
-            
           </div>
           <div className="hidden gap-2 lg:flex lg:flex-1 lg:justify-end">
             <Link
@@ -49,10 +53,16 @@ const Navbar = () => {
             >
               Log in <span aria-hidden="true">&rarr;</span>
             </Link>
-            <button className="text-sm font-semibold leading-6 text-gray-900">Cart</button>
+            <button
+              className="text-sm font-semibold leading-6 text-gray-900"
+              onClick={() => setIsCartOpen(!isCartOpen)}
+            >
+              Cart
+              <span className="pl-2">{cartItems?.length}</span>
+            </button>
+            {isCartOpen && <Cart />}
           </div>
         </nav>
-     
       </header>
     </>
   );
