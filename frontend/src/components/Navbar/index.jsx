@@ -47,7 +47,7 @@ const Navbar = () => {
           </div>
           <div className="hidden gap-2 lg:flex lg:flex-1 lg:justify-end">
             <Link
-              to="#"
+              to="/login"
               className="text-sm font-semibold leading-6 text-gray-900"
             >
               Log in <span aria-hidden="true">&rarr;</span>
